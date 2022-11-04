@@ -98,10 +98,15 @@ jobs:
         cabal --version
         echo "::set-output name=cabal-store::$(cabal --help | tail -1 | tr -d ' ' | rev | cut -d '/' -f2- | rev)\\store"
 
+        echo "== cabal config =="
+        cat /c/cabal/config
+
     - name: Setup additional gcc paths
       run: |
-        echo "C_INCLUDE_PATH=D:/a/_temp/msys64/mingw64/include;$C_INCLUDE_PATH" >> $GITHUB_ENV
-        echo "LIBRARY_PATH=D:/a/_temp/msys64/mingw64/lib;$LIBRARY_PATH" >> $GITHUB_ENV
+        echo 'C_INCLUDE_PATH=D:\a\_temp\msys64\mingw64\include;'"$C_INCLUDE_PATH"
+        echo 'LIBRARY_PATH=D:\a\_temp\msys64\mingw64\lib;'"$LIBRARY_PATH"
+        echo 'C_INCLUDE_PATH=D:\a\_temp\msys64\mingw64\include;'"$C_INCLUDE_PATH" >> $GITHUB_ENV
+        echo 'LIBRARY_PATH=D:\a\_temp\msys64\mingw64\lib;'"$LIBRARY_PATH" >> $GITHUB_ENV
 
     - name: Set cache version
       run: echo "CACHE_VERSION=grFfw8r" >> $GITHUB_ENV
